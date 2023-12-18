@@ -19,7 +19,9 @@ function sortByHeight(arr) {
       temp.push(arr[i]);
     }
   }
-  temp.sort();
+  temp.sort(function(a, b) {
+    return a - b;
+  });
   console.log("temp: ", temp);
   let j = 0;
   for (let i in arr) {
