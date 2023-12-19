@@ -23,18 +23,17 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function getDNSStats(domains) {
-  let mapDomains = new Map();
+  let mapDomains = {};
   for (let i in domains) {
     let temp = domains[i].split('.');
     console.log(temp);
     let domain = '';
     for (let j = temp.length - 1; j >= 0; j--) {
-      domain = domain+ '.'+temp[j];
-      if (mapDomains.has(domain)) {
-        let temp = mapDomains.delete(domain)
-        mapDomains[domain] = temp+1
+      domain = domain +'.'+temp[j];
+      if (mapDomains[domain]) {
+        mapDomains[domain] += 1;
       } else {
-        mapDomains.set(domain, 1);
+        mapDomains[domain] = 1;
       }
     }
   }
