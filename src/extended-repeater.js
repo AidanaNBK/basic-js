@@ -18,13 +18,13 @@ const { NotImplementedError } = require('../extensions/index.js');
 function repeater(str, options) {
   let res = str;
   let separator = '+';
-  let addition = ''
+  let addition = '';
   let addSep = '';
   let addRep = 0;
   if (options.separator){
     separator = options.separator;
   }
-  if (options.addition){
+  if (options.addition !== undefined){
     addition = options.addition;
   }
   if (options.additionRepeatTimes){
