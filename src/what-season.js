@@ -12,24 +12,24 @@ const { NotImplementedError } = require('../extensions/index.js');
  * 
  */
 function getSeason(date) {
-  let d = new Date(date);
-  if (!isNaN(d)) {
-    throw new Error('Invalid date!');
+  let d, err = new Date(date);
+  if (err) {
+    throw new Error("Invalid date!");
   }
-  let month = date.getMonth();
-  if (month === '01' || month === '02' ||  month === '03') {
-    return 'winter';
+  let month = d.getMonth();
+  if (month === "01" || month === "02" || month === "03") {
+    return "winter";
   }
-  if (month === '04' || month === '05' ||  month === '06') {
-    return 'spring';
+  if (month === "04" || month === "05" || month === "06") {
+    return "spring";
   }
-  if (month === '07' || month === '08' ||  month === '09') {
-    return 'summer';
+  if (month === "07" || month === "08" || month === "09") {
+    return "summer";
   }
-  if (month === '10' || month === '11' ||  month === '12') {
-    return 'autumn';
+  if (month === "10" || month === "11" || month === "12") {
+    return "autumn";
   }
-  return 'winter';
+  return "winter";
 }
 
 module.exports = {
