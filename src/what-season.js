@@ -12,33 +12,30 @@ const { NotImplementedError } = require('../extensions/index.js');
  * 
  */
 function getSeason(date) {
-  //console.log(date);
   if (!date){
     return "Unable to determine the time of year!";
   }
-  if (!(date instanceof Date) || !(notFake(date))) {
-    throw new Error("Invalid date!");
+  if (!(date instanceof Date) || (Object.getPrototypeOf(date) !== Date.prototype)) {
+    throw new Error('Invalid date!');
   }
-  let month = date.getMonth();
-  //console.log(month);
-  if (month === 0 || month === 1 || month === 11) {
-    return "winter";
+  try {
+    date.getMonth();
+    date.getTime();
+    date.getDate();
+    date.getFullYear();
+    const month = date.getMonth();
+    if (month === 11 || month === 0 || month === 1) {
+      return 'winter';
+    } else if (month >= 2 && month <= 4) {
+      return 'spring';
+    } else if (month >= 5 && month <= 7) {
+      return 'summer';
+    } else if (month >= 8 && month <= 10) {
+      return 'autumn';
+    }
+  } catch (error) {
+    throw new Error('Invalid date!');
   }
-  if (month === 2 || month === 3 || month === 4) {
-    return "spring";
-  }
-  if (month === 5 || month === 6 || month === 7) {
-    return "summer";
-  }
-  if (month === 8 || month === 9 || month === 10) {
-    return "autumn";
-  }
-  return "winter";
-}
-
-function notFake(date) {
-  const hasSame = Object.getPrototypeOf(date) === Object.getPrototypeOf(new Date());
-  return hasSame;
 }
 
 module.exports = {
